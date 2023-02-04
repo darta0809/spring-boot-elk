@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="info">
+  <Properties>
+    <Property name="LOG_HOME">./logs</Property>
+    <Property name="LOG_PATTERN"
+      value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread][%class{36}:%line] [log4j2]- %msg%n"></Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <RollingFile name="RollingFile" fileName="${LOG_HOME}/app_${date:yyyy-MM-dd}.log"
+      filePattern="${LOG_HOME}/%d{yyyy-MM}/app_%d{yyyy-MM-dd}_%i.log">
+      <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <SizeBasedTriggeringPolicy size="20MB"/>
+      <DefaultRolloverStrategy max="30"/>
+    </RollingFile>
+
+    <Socket name="Socket" host="localhost" port="5000" protocol="TCP">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Socket>
+  </Appenders>
+
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
+      <AppenderRef ref="Socket"/>
+    </Root>
+  </Loggers>
+
+</configuration>

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class SpringElkTest {
 
   @Test
-  void logBack() {
+  void testPrintLog() {
     log.info("info test");
     log.error("error test");
   }
