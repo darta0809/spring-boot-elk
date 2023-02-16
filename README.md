@@ -4,7 +4,7 @@
 
 使用 logback.xml 方式發送到 logstash 或是 log4j2 方式
 
-啟動 docker-compose  
+啟動 docker-compose，可能會遇到下載問題，可以手動先 docker pull   
 `docker-compose up --build -d`
 
 查看 elastic ui  

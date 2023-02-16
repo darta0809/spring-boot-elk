@@ -1,9 +1,8 @@
 version: "3.7"
 services:
   elasticsearch:
-    image: elasticsearch:7.17.2 # 8.3.1 # 7.17.2
+    image: elasticsearch:7.17.2
     container_name: elasticsearch
-    privileged: true # 給予 root 權限
     user: root
     environment:
       cluster.name: elasticsearch
@@ -16,7 +15,6 @@ services:
   logstash:
     image: logstash:7.17.2
     container_name: logstash
-    privileged: true # 給予 root 權限
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     ports:
       - "5000:5000"
@@ -28,9 +26,8 @@ services:
       - ./config/logstash:/etc/logstash/conf.d
 
   kibana:
-    image: kibana:7.17.2 # 8.3.1 # 7.17.2
+    image: kibana:7.17.2
     container_name: kibana
-    privileged: true # 給予 root 權限
     environment:
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "test123"
